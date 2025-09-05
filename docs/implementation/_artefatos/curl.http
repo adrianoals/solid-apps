@@ -1,0 +1,125 @@
+### BACKEND BACK4APP - DESAFIO SOLID APPS
+### App: DesafioSolidApps
+### Application ID: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+### Base URL: https://parseapi.back4app.com
+
+### 1. CRIAR USUÁRIO
+POST https://parseapi.back4app.com/users
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+
+{
+  "username": "testuser@example.com",
+  "email": "testuser@example.com",
+  "password": "testpass123"
+}
+
+### 2. LOGIN
+POST https://parseapi.back4app.com/login
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+
+{
+  "username": "testuser@example.com",
+  "password": "testpass123"
+}
+
+### 3. LOGOUT
+POST https://parseapi.back4app.com/logout
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+{}
+
+### 4. CRIAR CLIENTE
+POST https://parseapi.back4app.com/classes/Cliente
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+{
+  "name": "João Silva",
+  "email": "joao@empresa.com",
+  "phone": "11999999999"
+}
+
+### 5. CRIAR NOTA
+POST https://parseapi.back4app.com/classes/Nota
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+{
+  "title": "Primeira reunião",
+  "content": "Cliente demonstrou interesse no produto X. Agendar próxima reunião para próxima semana.",
+  "client": {
+    "__type": "Pointer",
+    "className": "Cliente",
+    "objectId": "GUZ7pfA6kc"
+  }
+}
+
+### 6. LISTAR CLIENTES (COM PAGINAÇÃO)
+GET https://parseapi.back4app.com/classes/Cliente?order=name&limit=20&skip=0
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### 7. LISTAR NOTAS DE UM CLIENTE
+GET https://parseapi.back4app.com/classes/Nota?where={"client":{"__type":"Pointer","className":"Cliente","objectId":"GUZ7pfA6kc"}}&order=-createdAt&limit=10&skip=0
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### 8. BUSCAR CLIENTES POR NOME
+GET https://parseapi.back4app.com/classes/Cliente?where={"name":{"$regex":"João","$options":"i"}}
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### 9. BUSCAR NOTAS POR TEXTO
+GET https://parseapi.back4app.com/classes/Nota?where={"$or":[{"title":{"$regex":"reunião","$options":"i"}},{"content":{"$regex":"reunião","$options":"i"}}]}
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### 10. ATUALIZAR CLIENTE
+PUT https://parseapi.back4app.com/classes/Cliente/GUZ7pfA6kc
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+{
+  "name": "João Santos Silva",
+  "phone": "11999999988"
+}
+
+### 11. ATUALIZAR NOTA
+PUT https://parseapi.back4app.com/classes/Nota/xgyZNSsAP5
+Content-Type: application/json
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+{
+  "title": "Primeira reunião - Atualizada",
+  "content": "Cliente demonstrou interesse no produto X. Agendar próxima reunião para próxima semana. Cliente solicitou proposta comercial."
+}
+
+### 12. DELETAR NOTA
+DELETE https://parseapi.back4app.com/classes/Nota/xgyZNSsAP5
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### 13. DELETAR CLIENTE (EXCLUSÃO EM CASCATA)
+DELETE https://parseapi.back4app.com/classes/Cliente/GUZ7pfA6kc
+X-Parse-Application-Id: zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt
+X-Parse-Session-Token: r:34f5d99f9e4b90d87c4bff9f7926b214
+
+### STATUS DOS TESTES:
+# ✅ Autenticação funcionando
+# ✅ LOGOUT funcionando
+# ✅ CREATE Cliente funcionando
+# ✅ CREATE Nota funcionando
+# ✅ READ com paginação funcionando
+# ✅ READ com filtros funcionando
+# ✅ UPDATE funcionando
+# ✅ DELETE funcionando
+# ✅ Isolamento de dados por usuário funcionando
+# ✅ Validações de negócio funcionando

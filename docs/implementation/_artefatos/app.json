@@ -1,0 +1,19 @@
+{
+  "appName": "DesafioSolidApps",
+  "applicationId": "zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt",
+  "serverURL": "https://parseapi.back4app.com",
+  "masterKey": "caJR061JMoPWMWbAo8KuuE84tSUbUnLp02FRzTqg",
+  "javascriptKey": "TRqMLg9whpj1fKsDEOoa40LE2VrAbUsoONO35Z2r",
+  "restKey": "xGJyAUbYDxUTsa83uP35wzFMVHZgoebjszsVsEOF",
+  "mobileKey": "wHYMfrivKXaqEdwz3yzNJCUr6qtK8pfSuiaa3iR0",
+  "webhookKey": "qVPosWoHy5wxsxc0mZlnlbKY5l709Mzdohbkxlme",
+  "createdAt": "2024-12-19T15:30:00Z",
+  "status": "active",
+  "description": "App para gerenciamento de Clientes e Notas com isolamento por usuário",
+  "classes": {
+    "_User": "Sistema nativo do Parse/Back4App",
+    "_Role": "Sistema nativo do Parse/Back4App",
+    "Cliente": "A ser criada",
+    "Nota": "A ser criada"
+  }
+}

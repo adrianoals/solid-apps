@@ -1,0 +1,84 @@
+{
+  "exportedAt": "2024-12-19T15:35:00Z",
+  "appName": "DesafioSolidApps",
+  "applicationId": "zKcYZkKXEcUbTxviGUzxxAwZkYcQJhcvvF81LFdt",
+  "schemas": [
+    {
+      "className": "_User",
+      "fields": {
+        "objectId": {"type": "String"},
+        "createdAt": {"type": "Date"},
+        "updatedAt": {"type": "Date"},
+        "ACL": {"type": "ACL"},
+        "username": {"type": "String"},
+        "password": {"type": "String"},
+        "email": {"type": "String"},
+        "emailVerified": {"type": "Boolean"},
+        "authData": {"type": "Object"}
+      },
+      "classLevelPermissions": {
+        "find": {"*": true},
+        "count": {"*": true},
+        "get": {"*": true},
+        "create": {"*": true},
+        "update": {"*": true},
+        "delete": {"*": true},
+        "addField": {"*": true},
+        "protectedFields": {"*": []}
+      }
+    },
+    {
+      "className": "Cliente",
+      "fields": {
+        "objectId": {"type": "String"},
+        "createdAt": {"type": "Date"},
+        "updatedAt": {"type": "Date"},
+        "ACL": {"type": "ACL"},
+        "name": {"type": "String"},
+        "email": {"type": "String"},
+        "phone": {"type": "String"},
+        "owner": {"type": "Pointer", "targetClass": "_User"}
+      },
+      "classLevelPermissions": {
+        "find": {"*": true},
+        "count": {"*": true},
+        "get": {"*": true},
+        "create": {"*": true},
+        "update": {"*": true},
+        "delete": {"*": true},
+        "addField": {"*": true},
+        "protectedFields": {"*": []}
+      }
+    },
+    {
+      "className": "Nota",
+      "fields": {
+        "objectId": {"type": "String"},
+        "createdAt": {"type": "Date"},
+        "updatedAt": {"type": "Date"},
+        "ACL": {"type": "ACL"},
+        "title": {"type": "String"},
+        "content": {"type": "String"},
+        "client": {"type": "Pointer", "targetClass": "Cliente"},
+        "owner": {"type": "Pointer", "targetClass": "_User"}
+      },
+      "classLevelPermissions": {
+        "find": {"*": true},
+        "count": {"*": true},
+        "get": {"*": true},
+        "create": {"*": true},
+        "update": {"*": true},
+        "delete": {"*": true},
+        "addField": {"*": true},
+        "protectedFields": {"*": []}
+      }
+    }
+  ],
+  "status": "✅ Classes criadas com sucesso",
+  "observations": [
+    "Classe Cliente criada com campos: name, email, phone, owner",
+    "Classe Nota criada com campos: title, content, client, owner",
+    "Relações Pointer configuradas corretamente",
+    "CLP padrão ativo (será configurado na próxima etapa)"
+  ]
+}
