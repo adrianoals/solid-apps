@@ -1,235 +1,99 @@
-# Solid Apps Challenge - CRUD App Implementation
+# Solid Apps Challenge - CRUD App with Bubble + Back4App
 
-## Project Overview
+## Delivery Summary
 
-This project implements a CRUD application for managing Clients and Notes, built with **Bubble** (frontend) and **Back4App** (backend). The application provides user authentication and data isolation, allowing authenticated users to manage their own clients and related notes.
+This project is part of the technical test to implement a CRUD application for **Clients** and **Notes**, using **Bubble** as frontend and **Back4App** as backend.
 
-## Technology Stack
+During development, respecting the **~6 hours** timebox, I completed the **backend** part (modeling, authentication, security, and complete CRUD via REST) and started the integration with Bubble.
 
-- **Frontend**: Bubble (UI only, no data storage)
-- **Backend**: Back4App (Parse Server with MongoDB 3.6)
-- **Integration**: REST API via Bubble's API Connector
-- **Authentication**: Back4App's native user system
-
-## Implementation Status
-
-### ✅ Completed Features
-
-#### Backend (Back4App)
-- **User Authentication System**
-  - User registration and login
-  - Session management with tokens
-  - Secure logout functionality
-
-- **Data Model Implementation**
-  - `Client` class with fields: `name`, `email`, `phone`, `owner`
-  - `Note` class with fields: `title`, `content`, `client`, `owner`
-  - Proper Pointer relationships between classes
-  - Data isolation per user via `owner` field
-
-- **Security Configuration**
-  - Class Level Permissions (CLP) configured
-  - Access Control Lists (ACL) implemented
-  - User data isolation enforced
-  - Session token validation
-
-- **API Integration**
-  - Complete REST API endpoints for all operations
-  - Proper error handling and validation
-  - Session-based authentication
-
-#### Frontend (Bubble)
-- **Authentication Pages**
-  - Login page with Back4App integration
-  - Signup page with user registration
-  - Logout functionality
-  - Session management
-
-- **API Connector Setup**
-  - Back4App API configuration
-  - Authentication headers setup
-  - Dynamic session token handling
-
-### ❌ Partially Implemented / Blocked
-
-#### Frontend (Bubble)
-- **Dashboard Implementation**
-  - Client list display (struggled with Repeating Group configuration)
-  - Client creation form (API integration incomplete)
-  - Note management interface (not implemented)
-  - Search and pagination features (not implemented)
-
-- **CRUD Operations**
-  - Client CRUD operations (API calls configured but UI integration incomplete)
-  - Note CRUD operations (not implemented)
-  - Data binding between API responses and UI components
-
-## Assumptions Made
-
-### Technical Assumptions
-1. **Back4App as Primary Backend**: Chose Back4App over other BaaS solutions due to its Parse Server foundation and MongoDB compatibility
-2. **REST API Integration**: Assumed Bubble's API Connector would handle all backend communication (no custom JavaScript plugins)
-3. **Session-Based Authentication**: Implemented token-based auth instead of OAuth for simplicity
-4. **Data Isolation**: Assumed Back4App's ACL/CLP system would provide sufficient data isolation
-5. **MongoDB 3.6 Compatibility**: Designed data model considering MongoDB 3.6 limitations and features
-
-### Development Assumptions
-1. **MCP Integration**: Assumed Cursor IDE's MCP integration would streamline Back4App development
-2. **Bubble Learning Curve**: Underestimated the complexity of Bubble's API Connector for complex data operations
-3. **No Custom JavaScript**: Assumed all integration could be done through Bubble's native API Connector
-4. **Time Allocation**: Estimated 4-6 hours would be sufficient for complete implementation
-
-### Business Logic Assumptions
-1. **User Registration**: Assumed email-based registration would be sufficient
-2. **Data Validation**: Assumed server-side validation would handle all data integrity
-3. **Error Handling**: Assumed standard HTTP error codes would be sufficient for user feedback
-4. **Scalability**: Assumed the current data model would handle moderate user loads
-
-## Known Limitations
-
-### Technical Limitations
-1. **Bubble API Connector Complexity**
-   - Difficulty configuring Repeating Groups with dynamic data
-   - Complex data binding between API responses and UI components
-   - Limited debugging capabilities for API integration issues
-
-2. **Backend Integration Challenges**
-   - Session token management in Bubble workflows
-   - Dynamic parameter passing to API calls
-   - Error handling and user feedback implementation
-
-3. **Development Environment**
-   - Limited real-time debugging for API calls
-   - Complex workflow configuration in Bubble
-   - Difficulty testing API responses in development
-
-### Functional Limitations
-1. **Incomplete CRUD Operations**
-   - Client management interface not fully functional
-   - Note creation and editing not implemented
-   - Search and filtering features missing
-
-2. **User Experience**
-   - Limited error feedback to users
-   - No loading states for API operations
-   - Basic UI without advanced interactions
-
-3. **Data Management**
-   - No bulk operations implemented
-   - Limited pagination support
-   - No data export/import functionality
-
-## Possible Improvements
-
-### Short-term Improvements (1-2 days)
-1. **Complete Bubble Integration**
-   - Master Repeating Group configuration for client lists
-   - Implement proper data binding for API responses
-   - Add comprehensive error handling and user feedback
-
-2. **Enhanced UI/UX**
-   - Add loading states for all API operations
-   - Implement proper form validation
-   - Create responsive design for mobile devices
-
-3. **Complete CRUD Operations**
-   - Finish client management interface
-   - Implement note creation and editing
-   - Add delete confirmations and success messages
-
-### Medium-term Improvements (1-2 weeks)
-1. **Advanced Features**
-   - Implement search and filtering
-   - Add pagination for large datasets
-   - Create data export functionality
-
-2. **Performance Optimization**
-   - Implement caching for frequently accessed data
-   - Optimize API calls and reduce redundancy
-   - Add offline support for basic operations
-
-3. **Enhanced Security**
-   - Implement rate limiting
-   - Add audit logging
-   - Enhance data validation
-
-### Long-term Improvements (1+ months)
-1. **Scalability Enhancements**
-   - Implement database indexing
-   - Add CDN for static assets
-   - Optimize for high user loads
-
-2. **Advanced Features**
-   - Real-time updates with WebSockets
-   - Advanced reporting and analytics
-   - Integration with external services
-
-3. **Mobile Application**
-   - Native mobile app development
-   - Push notifications
-   - Offline synchronization
-
-## Technical Architecture
-
-### Backend Architecture
-```
-Back4App (Parse Server)
-├── User Management (_User class)
-├── Client Management (Client class)
-├── Note Management (Note class)
-├── Security (CLP/ACL)
-└── REST API Endpoints
-```
-
-### Frontend Architecture
-```
-Bubble Application
-├── Authentication Pages
-├── Dashboard (Partially Implemented)
-├── API Connector
-└── Workflows (Limited Implementation)
-```
-
-## Development Challenges
-
-### Backend Development
-- **Success**: MCP integration with Cursor IDE streamlined Back4App development
-- **Success**: Parse Server's built-in features accelerated backend implementation
-- **Challenge**: Understanding Back4App's specific configuration requirements
-
-### Frontend Development
-- **Challenge**: Learning Bubble's API Connector without prior experience
-- **Challenge**: Configuring complex data operations through visual interface
-- **Challenge**: Debugging API integration issues in Bubble environment
-
-### Integration Challenges
-- **Challenge**: Managing session tokens across different API calls
-- **Challenge**: Handling dynamic data in Repeating Groups
-- **Challenge**: Implementing proper error handling in Bubble workflows
-
-## Lessons Learned
-
-1. **API Connector Learning Curve**: Bubble's API Connector requires significant learning time for complex integrations
-2. **MCP Effectiveness**: Cursor IDE's MCP integration significantly accelerated backend development
-3. **Documentation Importance**: Comprehensive documentation (like the implementation docs created) is crucial for complex integrations
-4. **Iterative Development**: Breaking down complex features into smaller, testable components is essential
-5. **Error Handling**: Proper error handling and user feedback is critical for user experience
-
-## Next Steps
-
-1. **Complete Bubble Integration**: Focus on mastering Repeating Groups and data binding
-2. **Implement Remaining CRUD**: Finish client and note management interfaces
-3. **Enhance User Experience**: Add proper loading states and error handling
-4. **Testing and Validation**: Comprehensive testing of all implemented features
-5. **Documentation**: Create user guides and technical documentation
-
-## Conclusion
-
-While the backend implementation was successful and comprehensive, the frontend integration with Bubble proved more challenging than anticipated. The project demonstrates the effectiveness of MCP integration for backend development but highlights the learning curve associated with Bubble's API Connector for complex data operations. With additional time and focused learning on Bubble's advanced features, a complete implementation would be achievable.
+Beyond the implementation, I documented in the repository the entire line of reasoning: the **prompts used**, the **responses from my Cursor agent**, and how I validated each step of configuration and implementations. This way, the delivery contains not only the code but also the process I followed.
 
 ---
 
-**Project Status**: Backend Complete, Frontend Partially Implemented  
-**Completion**: ~60%  
-**Time Invested**: ~6 hours  
-**Main Blocker**: Bubble API Connector complexity for advanced data operations
+## What Was Done
+
+### ✅ Backend (Back4App) — **Completed**
+
+* **User Authentication**
+
+  * Registration, login, logout, and session management with tokens.
+* **Data Modeling**
+
+  * `Client` class: `name`, `email`, `phone`, `owner`.
+  * `Note` class: `title`, `content`, `client`, `owner`.
+  * `Pointer` relationships between User → Client → Note.
+* **Security**
+
+  * Configuration of **CLP (Class Level Permissions)** and **ACL (Access Control Lists)**.
+  * User data isolation implemented.
+* **REST API**
+
+  * CRUD endpoints validated with cURL/Postman.
+  * Error handling and authentication configured.
+* **Documentation**
+
+  * All prompts and interactions used in Cursor are recorded in the repository, in `docs/implementation/` and in the `prompts/` folder.
+
+### 🔄 Frontend (Bubble) — **Partial**
+
+* **Authentication**
+
+  * Registration/login page integrated with Back4App.
+  * Functional logout.
+  * User session managed via token.
+* **API Integration**
+
+  * API Connector configured with dynamic headers (Application ID, Session Token).
+  * Some basic calls tested successfully.
+* **Interface**
+
+  * Initial dashboard structure created.
+  * Beginning of Repeating Groups configuration to list Clients.
+  * CRUD flows not yet finalized.
+
+---
+
+## Project Status
+
+* **Backend**: 100% ready and validated.
+* **Frontend**: ~30% completed (login/registration and part of dashboard).
+* **Integration**: ~50% configured.
+
+**Time invested:** ~6 hours (excluding initial environment setup).
+
+---
+
+## Challenges Encountered
+
+* My biggest difficulty was with the **Bubble API Connector**, mainly because it was my first experience with this feature.
+* My background comes more from **high-code** (JavaScript, Python, Supabase, etc.), where I've worked with direct integrations via code. In Bubble, I was more accustomed to using JavaScript on the frontend rather than configuring APIs directly in the editor.
+* Despite this, I managed to advance in the initial configuration and clearly document the points where I stopped.
+
+---
+
+## Next Steps (if there was more time)
+
+1. Finalize complete CRUD in Bubble (Clients and Notes).
+2. Complete responsive interface (desktop/mobile).
+3. Add visual feedbacks (loading, error, success).
+4. Improve security in session flow (automatic token renewal).
+5. Implement extra features (pagination, form validations, reusable components).
+
+---
+
+## Deliverables
+
+* **Demonstration Video (3–5 min)** showing authentication and configured backend.
+* **Technical Documentation (README and docs/implementation/)** detailing:
+
+  * Data modeling.
+  * Security configuration.
+  * API examples used.
+  * Cursor prompts and responses validated during implementation.
+  * Technical decisions, challenges, and next steps.
+
+---
+
+**Conclusion:** The backend was delivered complete and functional. The frontend was partially implemented, with integrated authentication and beginning of the dashboard. I recorded in detail the entire process on GitHub (including prompts and reasoning) to make clear the evolution, choices made, and points to continue.
+
+---
