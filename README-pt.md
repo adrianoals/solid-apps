@@ -1,4 +1,4 @@
-# Desafio Solid Apps - Implementação de App CRUD
+# Desafio Solid Apps - App CRUD com Bubble + Back4App
 
 ## Visão Geral do Projeto
 
@@ -11,217 +11,162 @@ Este projeto implementa uma aplicação CRUD para gerenciamento de Clientes e No
 - **Integração**: REST API via API Connector do Bubble
 - **Autenticação**: Sistema nativo de usuários do Back4App
 
-## Status da Implementação
+## Funcionalidades Implementadas
 
-### ✅ Funcionalidades Concluídas
+### ✅ Backend (Back4App) - 100% Completo
 
-#### Backend (Back4App)
-- **Sistema de Autenticação de Usuários**
+#### Sistema de Autenticação
   - Registro e login de usuários
   - Gerenciamento de sessão com tokens
   - Funcionalidade de logout segura
 
-- **Implementação do Modelo de Dados**
+#### Modelo de Dados
   - Classe `Client` com campos: `name`, `email`, `phone`, `owner`
   - Classe `Note` com campos: `title`, `content`, `client`, `owner`
   - Relacionamentos Pointer adequados entre classes
   - Isolamento de dados por usuário via campo `owner`
 
-- **Configuração de Segurança**
+#### Segurança
   - Permissões de Nível de Classe (CLP) configuradas
   - Listas de Controle de Acesso (ACL) implementadas
   - Isolamento de dados por usuário aplicado
   - Validação de token de sessão
 
-- **Integração de API**
-  - Endpoints REST API completos para todas as operações
+#### API REST
+- Endpoints completos para todas as operações CRUD
   - Tratamento adequado de erros e validação
   - Autenticação baseada em sessão
 
-#### Frontend (Bubble)
-- **Páginas de Autenticação**
+### ✅ Frontend (Bubble) - Parcialmente Implementado
+
+#### Autenticação
   - Página de login com integração Back4App
   - Página de cadastro com registro de usuário
   - Funcionalidade de logout
   - Gerenciamento de sessão
 
-- **Configuração do API Connector**
+#### API Connector
   - Configuração da API Back4App
   - Configuração de headers de autenticação
   - Gerenciamento dinâmico de token de sessão
 
-### ❌ Parcialmente Implementado / Bloqueado
+#### Interface (Em Desenvolvimento)
+- Estrutura básica do dashboard
+- Configuração inicial de componentes
+- Workflows de autenticação funcionais
 
-#### Frontend (Bubble)
-- **Implementação do Dashboard**
-  - Exibição da lista de clientes (dificuldade na configuração do Repeating Group)
-  - Formulário de criação de cliente (integração de API incompleta)
-  - Interface de gerenciamento de notas (não implementada)
-  - Funcionalidades de busca e paginação (não implementadas)
+## Como Executar o Projeto
 
-- **Operações CRUD**
-  - Operações CRUD de clientes (chamadas de API configuradas mas integração UI incompleta)
-  - Operações CRUD de notas (não implementadas)
-  - Vinculação de dados entre respostas da API e componentes da UI
+### Pré-requisitos
+- Conta no Back4App (gratuita)
+- Conta no Bubble (gratuita)
+- Navegador web moderno
 
-## Suposições Feitas
+### Configuração do Backend (Back4App)
 
-### Suposições Técnicas
-1. **Back4App como Backend Principal**: Escolhido Back4App sobre outras soluções BaaS devido à sua base Parse Server e compatibilidade com MongoDB
-2. **Integração REST API**: Assumido que o API Connector do Bubble lidaria com toda comunicação de backend (sem plugins JavaScript customizados)
-3. **Autenticação Baseada em Sessão**: Implementado auth baseado em token em vez de OAuth para simplicidade
-4. **Isolamento de Dados**: Assumido que o sistema ACL/CLP do Back4App forneceria isolamento de dados suficiente
-5. **Compatibilidade MongoDB 3.6**: Modelo de dados projetado considerando limitações e recursos do MongoDB 3.6
+1. **Criar App no Back4App**
+   - Acesse [back4app.com](https://back4app.com)
+   - Crie uma nova aplicação
+   - Anote o `Application ID` e `Master Key`
 
-### Suposições de Desenvolvimento
-1. **Integração MCP**: Assumido que a integração MCP do Cursor IDE agilizaria o desenvolvimento Back4App
-2. **Curva de Aprendizado Bubble**: Subestimada a complexidade do API Connector do Bubble para operações de dados complexas
-3. **Sem JavaScript Customizado**: Assumido que toda integração poderia ser feita através do API Connector nativo do Bubble
-4. **Alocação de Tempo**: Estimado que 4-6 horas seriam suficientes para implementação completa
+2. **Configurar Classes de Dados**
+   - Crie a classe `Client` com campos: `name` (String), `email` (String), `phone` (String), `owner` (Pointer to _User)
+   - Crie a classe `Note` com campos: `title` (String), `content` (String), `client` (Pointer to Client), `owner` (Pointer to _User)
 
-### Suposições de Lógica de Negócio
-1. **Registro de Usuário**: Assumido que registro baseado em email seria suficiente
-2. **Validação de Dados**: Assumido que validação do lado do servidor lidaria com toda integridade de dados
-3. **Tratamento de Erros**: Assumido que códigos de erro HTTP padrão seriam suficientes para feedback do usuário
-4. **Escalabilidade**: Assumido que o modelo de dados atual lidaria com cargas moderadas de usuários
+3. **Configurar Segurança**
+   - Configure CLP (Class Level Permissions) para ambas as classes
+   - Configure ACL (Access Control Lists) para isolamento de dados por usuário
 
-## Limitações Conhecidas
+### Configuração do Frontend (Bubble)
 
-### Limitações Técnicas
-1. **Complexidade do API Connector Bubble**
-   - Dificuldade na configuração de Repeating Groups com dados dinâmicos
-   - Vinculação complexa de dados entre respostas da API e componentes da UI
-   - Capacidades limitadas de debug para problemas de integração de API
+1. **Criar App no Bubble**
+   - Acesse [bubble.io](https://bubble.io)
+   - Crie uma nova aplicação
 
-2. **Desafios de Integração Backend**
-   - Gerenciamento de token de sessão em workflows do Bubble
-   - Passagem dinâmica de parâmetros para chamadas de API
-   - Implementação de tratamento de erros e feedback do usuário
+2. **Configurar API Connector**
+   - Adicione o API Connector
+   - Configure a URL base: `https://parseapi.back4app.com/`
+   - Configure headers: `X-Parse-Application-Id` e `X-Parse-Master-Key`
 
-3. **Ambiente de Desenvolvimento**
-   - Debug em tempo real limitado para chamadas de API
-   - Configuração complexa de workflow no Bubble
-   - Dificuldade para testar respostas de API em desenvolvimento
+3. **Implementar Autenticação**
+   - Crie páginas de login e cadastro
+   - Configure workflows para chamadas de API de autenticação
+   - Implemente gerenciamento de sessão
 
-### Limitações Funcionais
-1. **Operações CRUD Incompletas**
-   - Interface de gerenciamento de clientes não totalmente funcional
-   - Criação e edição de notas não implementadas
-   - Funcionalidades de busca e filtro ausentes
+### Arquivos de Configuração
 
-2. **Experiência do Usuário**
-   - Feedback de erro limitado aos usuários
-   - Nenhum estado de carregamento para operações de API
-   - UI básica sem interações avançadas
+O projeto inclui os seguintes arquivos de configuração:
+- `docs/implementation/` - Documentação completa da implementação
+- `cloud-code/triggers/` - Triggers do Back4App para validação
+- `docs/implementation/_artefatos/` - Arquivos de configuração e exemplos
 
-3. **Gerenciamento de Dados**
-   - Nenhuma operação em lote implementada
-   - Suporte limitado à paginação
-   - Nenhuma funcionalidade de exportação/importação de dados
+## Estrutura do Projeto
 
-## Possíveis Melhorias
-
-### Melhorias de Curto Prazo
-1. **Completar Integração Bubble**
-   - Dominar configuração de Repeating Group para listas de clientes
-   - Implementar vinculação adequada de dados para respostas de API
-   - Adicionar tratamento abrangente de erros e feedback do usuário
-
-2. **UI/UX Aprimorada**
-   - Adicionar estados de carregamento para todas operações de API
-   - Implementar validação adequada de formulários
-   - Criar design responsivo para dispositivos móveis
-
-3. **Completar Operações CRUD**
-   - Finalizar interface de gerenciamento de clientes
-   - Implementar criação e edição de notas
-   - Adicionar confirmações de exclusão e mensagens de sucesso
-
-### Melhorias de Médio Prazo
-1. **Funcionalidades Avançadas**
-   - Implementar busca e filtros
-   - Adicionar paginação para grandes conjuntos de dados
-   - Criar funcionalidade de exportação de dados
-
-2. **Otimização de Performance**
-   - Implementar cache para dados frequentemente acessados
-   - Otimizar chamadas de API e reduzir redundância
-   - Adicionar suporte offline para operações básicas
-
-3. **Segurança Aprimorada**
-   - Implementar limitação de taxa
-   - Adicionar logging de auditoria
-   - Aprimorar validação de dados
-
-### Melhorias de Longo Prazo
-1. **Melhorias de Escalabilidade**
-   - Implementar indexação de banco de dados
-   - Adicionar CDN para assets estáticos
-   - Otimizar para altas cargas de usuários
-
-2. **Funcionalidades Avançadas**
-   - Atualizações em tempo real com WebSockets
-   - Relatórios e analytics avançados
-   - Integração com serviços externos
-
-3. **Aplicação Mobile**
-   - Desenvolvimento de app mobile nativo
-   - Notificações push
-   - Sincronização offline
-
-## Arquitetura Técnica
-
-### Arquitetura Backend
 ```
-Back4App (Parse Server)
-├── Gerenciamento de Usuários (classe _User)
-├── Gerenciamento de Clientes (classe Client)
-├── Gerenciamento de Notas (classe Note)
-├── Segurança (CLP/ACL)
-└── Endpoints REST API
+Desafio-Solid-Apps/
+├── cloud-code/
+│   └── triggers/           # Triggers do Back4App
+├── docs/
+│   ├── context.md         # Contexto do desafio
+│   └── implementation/    # Documentação técnica
+├── prompts/               # Prompts utilizados
+└── triggers/             # Triggers adicionais
 ```
 
-### Arquitetura Frontend
-```
-Aplicação Bubble
-├── Páginas de Autenticação
-├── Dashboard (Parcialmente Implementado)
-├── API Connector
-└── Workflows (Implementação Limitada)
-```
+## Documentação Técnica
 
-## Desafios de Desenvolvimento
+### Backend (Back4App)
+- **Modelo de Dados**: Documentado em `docs/implementation/02-data-modeling.md`
+- **Configuração de Segurança**: Documentado em `docs/implementation/03-security-config.md`
+- **Triggers de Validação**: Implementados em `cloud-code/triggers/`
+- **Exemplos de API**: Disponíveis em `docs/implementation/_artefatos/curl.http`
 
-### Desenvolvimento Backend
-- **Sucesso**: Integração MCP com Cursor IDE agilizou desenvolvimento Back4App
-- **Sucesso**: Recursos integrados do Parse Server aceleraram implementação backend
-- **Desafio**: Entender requisitos específicos de configuração do Back4App
+### Frontend (Bubble)
+- **Configuração de API**: Documentado em `docs/implementation/05-crud-examples.md`
+- **Prompts de Implementação**: Disponíveis em `prompts/`
 
-### Desenvolvimento Frontend
-- **Desafio**: Aprender API Connector do Bubble sem experiência prévia
-- **Desafio**: Configurar operações de dados complexas através de interface visual
-- **Desafio**: Debugar problemas de integração de API no ambiente Bubble
+## Status Atual
 
-### Desafios de Integração
-- **Desafio**: Gerenciar tokens de sessão entre diferentes chamadas de API
-- **Desafio**: Lidar com dados dinâmicos em Repeating Groups
-- **Desafio**: Implementar tratamento adequado de erros em workflows Bubble
+### ✅ Concluído
+- **Backend completo** com todas as funcionalidades CRUD
+- **Sistema de autenticação** funcional
+- **Segurança e isolamento de dados** implementados
+- **Documentação técnica** completa
 
-## Lições Aprendidas
+### 🔄 Em Desenvolvimento
+- **Interface do usuário** no Bubble
+- **Integração completa** entre frontend e backend
+- **Operações CRUD** na interface
 
-1. **Curva de Aprendizado API Connector**: API Connector do Bubble requer tempo significativo de aprendizado para integrações complexas
-2. **Efetividade MCP**: Integração MCP do Cursor IDE acelerou significativamente desenvolvimento backend
-3. **Importância da Documentação**: Documentação abrangente (como os docs de implementação criados) é crucial para integrações complexas
-4. **Desenvolvimento Iterativo**: Quebrar funcionalidades complexas em componentes menores e testáveis é essencial
-5. **Tratamento de Erros**: Tratamento adequado de erros e feedback do usuário é crítico para experiência do usuário
+### 📊 Progresso
+- **Backend**: 100% completo
+- **Frontend**: ~30% implementado
+- **Integração**: ~50% configurada
 
-## Conclusão
+## Próximos Passos
 
-Embora a implementação backend tenha sido bem-sucedida e abrangente, a integração frontend com Bubble provou ser mais desafiadora do que o esperado. O projeto demonstra a efetividade da integração MCP para desenvolvimento backend, mas destaca a curva de aprendizado associada aos recursos avançados do API Connector do Bubble para operações de dados complexas. Com tempo adicional e aprendizado focado nos recursos avançados do Bubble, uma implementação completa seria alcançável.
+1. **Completar Interface Bubble**
+   - Finalizar configuração de Repeating Groups
+   - Implementar operações CRUD na UI
+   - Adicionar tratamento de erros e feedback
+
+2. **Testes e Validação**
+   - Testar fluxos completos de usuário
+   - Validar segurança e isolamento de dados
+   - Otimizar performance
+
+3. **Deploy e Documentação**
+   - Deploy da aplicação
+   - Documentação de usuário final
+   - Vídeo demonstrativo
+
+## Contato
+
+Para dúvidas sobre a implementação, consulte a documentação em `docs/implementation/` ou os arquivos de exemplo em `docs/implementation/_artefatos/`.
 
 ---
 
-**Status do Projeto**: Backend Completo, Frontend Parcialmente Implementado  
-**Conclusão**: ~60%  
+**Status do Projeto**: Backend Completo, Frontend em Desenvolvimento  
+**Conclusão**: ~70%  
 **Tempo Investido**: ~6 horas  
-**Principal Bloqueador**: Complexidade do API Connector Bubble para operações de dados avançadas
+**Próximo Foco**: Finalizar integração Bubble
